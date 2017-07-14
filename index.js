@@ -20,12 +20,12 @@ let hrefs = {}
 
 app.get('/',  (req, res) => {
 	model.subTags.select(connection, (modelErr, rows, fields)=>{
-		rows.splice(1,100);
+		rows.splice(1,142);
 		let tasks = rows.map(ele=>{
-			console.log(ele.sub_tag_name)
+			// console.log(ele.sub_tag_name)
 			let options = {
 				proxy: config.proxy,
-				url: 'https://book.douban.com/tag/'+encodeURI(ele.sub_tag_name)
+				url: `https://book.douban.com/tag/${encodeURI(ele.sub_tag_name)}?start=0&type=S`
 			}
 			return new Promise((resolve, reject)=>{
 				request(options, (err, response, body)=>{
@@ -33,6 +33,25 @@ app.get('/',  (req, res) => {
 						console.log('succeeded in getting '+ ele.sub_tag_name)
 						$ = cheerio.load(body);
 						let result = $('.subject-item');
+						let book = {};
+						let titleAndHref = $('.subject-item .info h2 a');
+						let imgSrc = $('.subject-item img');
+						let pubs = $('.subject-item .pub');
+						let ratings = $('.subject-item .rating_nums');
+						let pl = $('.subject-item .pl');
+						let des = $('.subject-item .clearfix+p');
+						for (ele in pubs) {
+							console.log(pubs[ele]);
+							// book.pub = pubs[ele]
+						}
+						for (ele in imgSrc) {
+							book.pic_url = imgSrc[ele].attribs.src;
+						}
+						for (ele in titleAndHref) {
+							book.name = titleAndHref[ele].attribs.title;
+							book.detail_url = titleAndHref[ele].attribs.href;
+						}
+						console.log(book);
 						resolve(result);
 					} else {
 						console.log('err....'+err);
@@ -52,11 +71,11 @@ app.get('/',  (req, res) => {
 })
 
 
-/*app.get('/',  (req, res) => {
+app.get('/',  (req, res) => {
 
 	let options = {
 		proxy: 'http://dev-proxy.oa.com:8080',
-		url: 'https://book.douban.com/tag/'+encodeURI('小说')
+		url: 'https://book.douban.com/tag/'+encodeURI('小说')+'?type=S&start=20'
 	}
 
 	request(options, (err, response, body)=>{
@@ -75,7 +94,7 @@ app.get('/',  (req, res) => {
 
 
 })
-*/
+
 
 
 let server = app.listen(3000, ()=>{
