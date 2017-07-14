@@ -1,0 +1,32 @@
+{
+  "name": "node_scrapy",
+  "version": "1.0.0",
+  "description": "a scrapy for douban",
+  "main": "index.js",
+  "scripts": {
+    "go": "node index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ljxcript/node_scrapy.git"
+  },
+  "keywords": [
+    "node",
+    "scrapy",
+    "react-native"
+  ],
+  "author": "marcoliao",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ljxcript/node_scrapy/issues"
+  },
+  "homepage": "https://github.com/ljxcript/node_scrapy#readme",
+  "dependencies": {
+    "cheerio": "^1.0.0-rc.2",
+    "express": "^4.15.3",
+    "mysql": "^2.13.0",
+    "node-dev": "^3.1.3",
+    "request": "^2.81.0"
+  }
+}
