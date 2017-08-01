@@ -26,11 +26,13 @@
 				    height:'100%',
 				    video:video,
 				    modId:"Video_1",
-				    auto:true,
+				    autoplay:true,
 				    onallended: function() {
 						var video_container = document.getElementById("Video_1");
-					    video_container.replaceChild(img, video_container.firstElementChild);
-				    	
+					   	video_container.replaceChild(img, video_container.firstElementChild);
+				    		setTimeout(function(){
+							video_container.parentElement.removeChild(video_container);
+						}, 4000)
 				    }
 				});
 
