@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<title>test</title>
+		<meta charset="UTF-8">
+		<script src="http://imgcache.gtimg.cn/tencentvideo_v1/tvp/js/tvp.player_v2_mobile.js"></script>
+	</head>
+	<body>
+		<div id = "Video_1">
+		</div>
+
+		<script type="text/javascript">
+			window.onload = function() {
+				var gif_url = "https://raw.githubusercontent.com/ljxcript/marcoDaily/master/baymax.gif"
+				var img = new Image();
+				img.src= gif_url;
+				img.style.width="100%";
+				img.style.height="100%";
+
+
+				var video = new tvp.VideoInfo();
+				video.setVid("v0353algjfi");
+						
+				var myplayer = new tvp.Player();
+				myplayer.create({
+				    width:'100%',
+				    height:'100%',
+				    video:video,
+				    modId:"Video_1",
+				    auto:true,
+				    onallended: function() {
+						var video_container = document.getElementById("Video_1");
+					    video_container.replaceChild(img, video_container.firstElementChild);
+				    	
+				    }
+				});
+
+			}
+		</script>
+	</body>
+</html>
+
